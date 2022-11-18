@@ -1,6 +1,6 @@
 {
   "name": "@hermes-renderer/vue",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A Markdown+Components Renderer that will render your Markdown file to a Vue component!",
   "keywords": [
     "markdown",
@@ -34,7 +34,7 @@
   },
   "types": "./dist/types/index.d.ts",
   "devDependencies": {
-    "@hermes-renderer/core": "^0",
+    "@hermes-renderer/core": "^0.3.0",
     "@types/debug": "^4.1.7",
     "@types/mdast": "^3.0.10",
     "@types/node": "^18.11.9",
