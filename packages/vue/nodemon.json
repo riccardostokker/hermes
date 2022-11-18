@@ -1,0 +1,14 @@
+{
+  "exec": "pnpm build",
+  "ignoreRoot": [
+    ".git"
+  ],
+  "watch": [
+    "src/",
+    "node_modules/@hermes-renderer/"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "ts,js,json,vue"
+}

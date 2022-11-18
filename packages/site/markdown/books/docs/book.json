@@ -1,0 +1,20 @@
+{
+  "slug": "docs",
+  "name": "Documentation",
+  "chapters": [
+    {
+      "slug": "getting-started",
+      "name": "Getting Started",
+      "sections": [
+        {
+          "slug": "index",
+          "name": "Index"
+        },
+        {
+          "slug": "test",
+          "name": "Test"
+        }
+      ]
+    }
+  ]
+}
