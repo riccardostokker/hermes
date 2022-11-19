@@ -9,22 +9,21 @@ export default class Link extends VueTransformer {
         return 'link';
     }
 
-    protected onLoad() {
+    onLoad() {
         // Load default classes and styles
-        const props = this.getPropsManager();
-        props.classes(this.getTheme()?.link?.class);
-        props.styles(this.getTheme()?.link?.style);
+        this.classes(this.getTheme()?.link?.class);
+        this.styles(this.getTheme()?.link?.style);
     }
 
     public transform(node: Node, children: VNode[]) {
         const link = node as MDLink;
 
-        const props = this.getPropsManager();
-        props.merge({
+        this.props = {
+            ...this.props,
             href: link.url
-        });
+        };
 
-        return h('a', props.getProps(), children);
+        return h('a', this.props, children);
     }
 
 }

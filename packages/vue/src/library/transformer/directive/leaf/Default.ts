@@ -16,11 +16,11 @@ export default class Default extends DirectiveTransformer {
         const component: ConcreteComponent | undefined = this.configuration?.components?.[directive.name];
 
         if(component){
-            const manager = this.getPropsManager().clone();
-            manager.merge({
+            this.props = {
+                ...this.props,
                 context: this.context
-            });
-            return h(component, manager.getProps(), () => children);
+            };
+            return h(component, this.props, () => children);
         } else
             return undefined;
 

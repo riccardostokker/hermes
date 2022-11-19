@@ -8,15 +8,14 @@ export default class Default extends DirectiveTransformer {
         return 'underline';
     }
 
-    protected onLoad() {
+    onLoad() {
         // Load default classes and styles
-        const manager = this.getPropsManager();
-        manager.classes(this.getTheme()?.text?.underline?.class);
-        manager.styles(this.getTheme()?.text?.underline?.style);
+        this.classes(this.getTheme()?.text?.underline?.class);
+        this.styles(this.getTheme()?.text?.underline?.style);
     }
 
     public transform(node: Node, children: VNode[]) {
-        return h('span', this.getProps(), children);
+        return h('span', this.props, children);
     }
 
 }

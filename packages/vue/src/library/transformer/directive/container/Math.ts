@@ -10,11 +10,10 @@ export default class Math extends DirectiveTransformer {
         return 'math';
     }
 
-    protected onLoad() {
+    onLoad() {
         // Load default classes and styles
-        const manager = this.getPropsManager();
-        manager.classes(this.getTheme()?.math?.block?.class);
-        manager.styles(this.getTheme()?.math?.block?.style);
+        this.classes(this.getTheme()?.math?.block?.class);
+        this.styles(this.getTheme()?.math?.block?.style);
     }
 
     public transform(node: Node) {
@@ -42,11 +41,12 @@ export default class Math extends DirectiveTransformer {
             output: 'html'
         });
 
-        this.getPropsManager().merge({
+        this.props = {
+            ...this.props,
             innerHTML: katexString
-        });
+        };
 
-        return h('div', this.getProps());
+        return h('div', this.props);
 
     }
 

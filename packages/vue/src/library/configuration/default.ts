@@ -7,7 +7,8 @@ import * as Markdown from '../transformer/markdown';
 import * as Text from '../transformer/directive/text';
 import * as Leaf from '../transformer/directive/leaf';
 import * as Container from '../transformer/directive/container';
-import TailwindDark from '../theme/TailwindDark';
+
+import Theme from '../theme';
 
 const configuration: Configuration<Record<string, unknown>> = {
 
@@ -17,7 +18,7 @@ const configuration: Configuration<Record<string, unknown>> = {
         interpolate: true
     },
 
-    theme: TailwindDark,
+    theme: Theme.StylesLight,
 
     transformers: {
         directive: {

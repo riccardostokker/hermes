@@ -16,12 +16,11 @@ export default class Default extends DirectiveTransformer {
         const color = this.getTheme()?.text?.colors?.[directive.name];
 
         if(color){
-            const manager = this.getPropsManager().clone();
-            manager.classes(color?.class);
-            manager.styles(color?.style);
-            return h('span', manager.getProps(), children);
+            this.classes(color?.class);
+            this.styles(color?.style);
+            return h('span', this.props, children);
         } else {
-            return h('span', this.getProps(), children);
+            return h('span', this.props, children);
         }
 
     }

@@ -10,25 +10,24 @@ export default class InlineMath extends VueTransformer {
         return 'inlineMath';
     }
 
-    protected onLoad() {
+    onLoad() {
         // Load default classes and styles
-        const props = this.getPropsManager();
-        props.classes(this.getTheme()?.math?.inline?.class);
-        props.styles(this.getTheme()?.math?.inline?.style);
+        this.classes(this.getTheme()?.math?.inline?.class);
+        this.styles(this.getTheme()?.math?.inline?.style);
     }
 
     public transform(node: Node) {
         const math = node as MDInlineMath;
 
-        const props = this.getPropsManager();
-        props.merge({
+        this.props = {
+            ...this.props,
             innerHTML: katex.renderToString(math.value, {
                 displayMode: false,
                 output: 'html'
             })
-        });
+        };
 
-        return h('span', props.getProps());
+        return h('span', this.props);
     }
 
 }

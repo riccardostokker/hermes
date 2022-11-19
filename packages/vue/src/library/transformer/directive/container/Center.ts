@@ -8,15 +8,14 @@ export default class Math extends DirectiveTransformer {
         return 'center';
     }
 
-    protected onLoad() {
+    onLoad() {
         // Load default classes and styles
-        const manager = this.getPropsManager();
-        manager.classes(this.getTheme()?.layout?.center?.class);
-        manager.styles(this.getTheme()?.layout?.center?.style);
+        this.classes(this.getTheme()?.layout?.center?.class);
+        this.styles(this.getTheme()?.layout?.center?.style);
     }
 
     public transform(node: Node, children: VNode[]) {
-        return h('div', this.getProps(), children);
+        return h('div', this.props, children);
     }
 
 }

@@ -26,7 +26,7 @@
 <script lang="ts" setup>
 
 import {HermesRenderer, Configurations} from '@hermes-renderer/vue';
-import {Ref, ref} from 'vue';
+import {ConcreteComponent, Ref, ref} from 'vue';
 import RenderingStats from './RenderingStats.vue';
 
 const initial = await import('./initial.md?raw');
@@ -34,5 +34,11 @@ const initial = await import('./initial.md?raw');
 const config = Configurations.Default();
 const source = ref(initial.default);
 const load: Ref<unknown> = ref(undefined);
+
+import Dummy from './Dummy.vue';
+
+config.components = {
+  dummy: Dummy as ConcreteComponent
+};
 
 </script>

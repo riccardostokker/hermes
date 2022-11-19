@@ -10,24 +10,23 @@ export default class InlineCode extends VueTransformer {
         return 'inlineCode';
     }
 
-    protected onLoad() {
+    onLoad() {
         // Load default classes and styles
-        const props = this.getPropsManager();
-        props.classes(this.getTheme()?.code?.inline?.class);
-        props.styles(this.getTheme()?.code?.inline?.style);
+        this.classes(this.getTheme()?.code?.inline?.class);
+        this.styles(this.getTheme()?.code?.inline?.style);
     }
 
     public transform(node: Node) {
         const code = node as MDInlineCode;
 
-        const props = this.getPropsManager();
-        props.merge({
+        this.props = {
+            ...this.props,
             innerHTML: hljs.highlight(code.value, {
                 language: 'text'
             }).value
-        });
+        };
 
-        return h('code', props.getProps());
+        return h('code', this.props);
     }
 
 }

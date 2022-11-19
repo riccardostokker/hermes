@@ -8,15 +8,14 @@ export default class ListItem extends VueTransformer {
         return 'listItem';
     }
 
-    protected onLoad() {
+    onLoad() {
         // Load default classes and styles
-        const props = this.getPropsManager();
-        props.classes(this.getTheme()?.list?.li?.class);
-        props.styles(this.getTheme()?.list?.li?.style);
+        this.classes(this.getTheme()?.list?.li?.class);
+        this.styles(this.getTheme()?.list?.li?.style);
     }
 
     public transform(node: Node, children: VNode[]) {
-        return h('li', this.getProps(), children);
+        return h('li', this.props, children);
     }
 
 }

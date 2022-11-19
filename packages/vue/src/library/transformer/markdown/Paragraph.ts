@@ -8,16 +8,15 @@ export default class Paragraph extends VueTransformer {
         return 'paragraph';
     }
 
-    protected onLoad() {
+    onLoad() {
         // Load default classes and styles
-        const props = this.getPropsManager();
-        props.classes(this.getTheme()?.paragraph?.class);
-        props.styles(this.getTheme()?.paragraph?.style);
+        this.classes(this.getTheme()?.paragraph?.class);
+        this.styles(this.getTheme()?.paragraph?.style);
     }
 
 
     public transform(node: Node, children: VNode[]) {
-        return h('p', this.getProps(), children);
+        return h('p', this.props, children);
     }
 
 }

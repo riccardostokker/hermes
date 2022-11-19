@@ -43,7 +43,7 @@ export default abstract class Transformer<
      * @protected
      */
     // eslint-disable-next-line
-    public beforeRender(input: Input): void {}
+    public beforeTransform(input: Input): void {}
 
     /**
      * This is called as soon as the transformer is instantiated.
@@ -51,12 +51,12 @@ export default abstract class Transformer<
      * @protected
      */
     // eslint-disable-next-line
-    public afterRender(output: Output): void {}
+    public afterTransform(output: Output): void {}
 
     public run(input: Input, ...args: unknown[]): Output {
-        this.beforeRender(input);
+        this.beforeTransform(input);
         const output = this.transform(input, args);
-        this.afterRender(output);
+        this.afterTransform(output);
         return output;
     }
 

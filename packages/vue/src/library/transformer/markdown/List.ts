@@ -9,19 +9,17 @@ export default class List extends VueTransformer{
         return 'list';
     }
 
-
     public transform(node: Node, children: VNode[]) {
         const list = node as MDList;
-        const props = this.getPropsManager();
 
         if(list.ordered){
-            props.classes(this.configuration.theme.list?.ol?.class);
-            props.styles(this.configuration.theme.list?.ol?.style);
-            return h('ol', props.getProps(), children);
+            this.classes(this.configuration.theme.list?.ol?.class);
+            this.styles(this.configuration.theme.list?.ol?.style);
+            return h('ol', this.props, children);
         } else {
-            props.classes(this.configuration.theme.list?.ul?.class);
-            props.styles(this.configuration.theme.list?.ul?.style);
-            return h('ul', props.getProps(), children);
+            this.classes(this.configuration.theme.list?.ul?.class);
+            this.styles(this.configuration.theme.list?.ul?.style);
+            return h('ul', this.props, children);
         }
 
     }

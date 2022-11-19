@@ -8,15 +8,14 @@ export default class Emphasis extends VueTransformer {
         return 'emphasis';
     }
 
-    protected onLoad() {
+    onLoad() {
         // Load default classes and styles
-        const props = this.getPropsManager();
-        props.classes(this.getTheme()?.code?.block?.class);
-        props.styles(this.getTheme()?.code?.block?.style);
+        this.classes(this.getTheme()?.code?.block?.class);
+        this.styles(this.getTheme()?.code?.block?.style);
     }
 
     public transform(node: Node, children: VNode[]) {
-        return h('em', this.getProps(), children);
+        return h('em', this.props, children);
     }
 
 }

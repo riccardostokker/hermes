@@ -10,11 +10,10 @@ export default class Math extends VueTransformer {
         return 'math';
     }
 
-    protected onLoad() {
+    onLoad() {
         // Load default classes and styles
-        const props = this.getPropsManager();
-        props.classes(this.getTheme()?.math?.block?.class);
-        props.styles(this.getTheme()?.math?.block?.style);
+        this.classes(this.getTheme()?.math?.block?.class);
+        this.styles(this.getTheme()?.math?.block?.style);
     }
 
     public transform(node: Node) {
@@ -25,12 +24,12 @@ export default class Math extends VueTransformer {
             output: 'html'
         });
 
-        const manager = this.getPropsManager();
-        manager.merge({
+        this.props = {
+            ...this.props,
             innerHTML: mathString
-        });
+        };
 
-        return h('div', this.getProps());
+        return h('div', this.props);
     }
 
 }

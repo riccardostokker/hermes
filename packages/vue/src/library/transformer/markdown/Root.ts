@@ -8,15 +8,14 @@ export default class Root extends VueTransformer {
         return 'root';
     }
 
-    protected onLoad() {
+    onLoad() {
         // Load default classes and styles
-        const props = this.getPropsManager();
-        props.classes(this.getTheme()?.container?.class);
-        props.styles(this.getTheme()?.container?.style);
+        this.classes(this.getTheme()?.container?.class);
+        this.styles(this.getTheme()?.container?.style);
     }
 
     public transform(node: Node, children: VNode[]) {
-        return h('div', this.getProps(), children);
+        return h('div', this.props, children);
     }
 
 }

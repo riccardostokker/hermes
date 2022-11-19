@@ -12,7 +12,7 @@ const packagesPath = resolve(__dirname, '../packages');
 const watchers: FSWatcher[] = [];
 const last: Record<string, number> = {};
 
-for (const pkg of packages){
+for (const pkg of packages) {
 
     const watcher = watch([
         resolve(packagesPath, pkg, 'src/**/*'),
@@ -22,7 +22,7 @@ for (const pkg of packages){
     watcher.on('change', async () => {
         const spawn = child_process.spawn;
 
-        if(last[pkg] && Date.now() - last[pkg] < 500)
+        if (last[pkg] && Date.now() - last[pkg] < 500)
             return;
 
         last[pkg] = Date.now();
@@ -32,6 +32,11 @@ for (const pkg of packages){
         spawn('pnpm', ['build'], {
             //stdio: ['pipe', 'inherit', 'pipe'],
             cwd: resolve(packagesPath, pkg)
+        }).on('exit', (code) => {
+            if (code !== 0)
+                console.log(`Build for package '${pkg} failed.'`);
+            else
+                console.log(`Build for package '${pkg} completed.'`);
         });
 
     });
@@ -42,9 +47,9 @@ for (const pkg of packages){
 
 console.log('Watcher initialized. Listening for changes...');
 
-for(const signal of ['SIGINT', 'SIGTERM', 'SIGQUIT']){
+for (const signal of ['SIGINT', 'SIGTERM', 'SIGQUIT']) {
     process.on(signal, async () => {
-        for(const watcher of watchers)
+        for (const watcher of watchers)
             await watcher.close();
     });
 }

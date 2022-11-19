@@ -8,15 +8,14 @@ export default class Strong extends VueTransformer {
         return 'strong';
     }
 
-    protected onLoad() {
+    onLoad() {
         // Load default classes and styles
-        const manager = this.getPropsManager();
-        manager.classes(this.getTheme()?.text?.strong?.class);
-        manager.styles(this.getTheme()?.text?.strong?.style);
+        this.classes(this.getTheme()?.text?.strong?.class);
+        this.styles(this.getTheme()?.text?.strong?.style);
     }
 
     public transform(node: Node, children: VNode[]) {
-        return h('strong', this.getProps(), children);
+        return h('strong', this.props, children);
     }
 
 }
