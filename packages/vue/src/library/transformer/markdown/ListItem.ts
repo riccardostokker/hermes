@@ -1,6 +1,5 @@
 import {h, VNode} from 'vue';
 import {Node} from 'unist';
-import {ListItem as MDListItem} from 'mdast';
 import {Transformer} from '@hermes-renderer/core';
 import Configuration from '../../../core/Configuration';
 

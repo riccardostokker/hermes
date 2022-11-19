@@ -21,7 +21,7 @@
 
 import {BookRenderer} from '#components';
 import {createError, definePageMeta, navigateTo, useFetch, useRoute} from '#imports';
-import {reactive, Ref, ref, watch} from 'vue';
+import {Ref, ref, watch} from 'vue';
 import {Section} from '~/modules/book';
 
 definePageMeta({

@@ -37,7 +37,7 @@ rendererConfiguration.theme.container = {
   ]
 };
 
-const emit = defineEmits(['loaded']);
+defineEmits(['loaded']);
 
 const front = ref({});
 

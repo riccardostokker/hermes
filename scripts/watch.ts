@@ -19,7 +19,7 @@ for (const pkg of packages){
         resolve(packagesPath, pkg, 'node_modules/@hermes-renderer/**/dist/**/*')
     ]);
 
-    watcher.on('change', async (path: string) => {
+    watcher.on('change', async () => {
         const spawn = child_process.spawn;
 
         if(last[pkg] && Date.now() - last[pkg] < 500)

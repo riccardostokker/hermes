@@ -1,4 +1,3 @@
-import {ConfigurationFactory} from '@hermes-renderer/core';
 import {App} from 'vue';
 import HermesRenderer from './library/components/HermesRenderer.vue';
 

@@ -1,3 +1,6 @@
-export default interface NameInterface {
+interface NameInterface {
     getName() : string;
 }
+
+export default NameInterface;
+
