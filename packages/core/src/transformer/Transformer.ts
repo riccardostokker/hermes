@@ -27,6 +27,39 @@ export default abstract class Transformer<
         this.configuration = configuration;
     }
 
+    /* #### Lifecycle Hooks #### */
+
+
+    /**
+     * This is called as soon as the transformer is instantiated.
+     * Can be useful to edit objects that will often be used in the transform function.
+     * @protected
+     */
+    public onLoad(): void {}
+
+    /**
+     * This is called as soon as the transformer is instantiated.
+     * Can be useful to edit objects used in the transform function.
+     * @protected
+     */
+    // eslint-disable-next-line
+    public beforeRender(input: Input): void {}
+
+    /**
+     * This is called as soon as the transformer is instantiated.
+     * Can be useful to edit objects used in the transform function.
+     * @protected
+     */
+    // eslint-disable-next-line
+    public afterRender(output: Output): void {}
+
+    public run(input: Input, ...args: unknown[]): Output {
+        this.beforeRender(input);
+        const output = this.transform(input, args);
+        this.afterRender(output);
+        return output;
+    }
+
     public abstract getName(): string;
 
     /**

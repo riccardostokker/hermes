@@ -1,27 +1,22 @@
-import {Transformer} from '@hermes-renderer/core';
+import VueTransformer from '@/core/transformer/VueTransformer';
 import {Node} from 'unist';
 import {h, VNode} from 'vue';
-import Configuration from '../../../core/Configuration';
 
-export default class Emphasis extends Transformer<
-    Node,
-    VNode,
-    Record<string, unknown>,
-    Configuration<Record<string, unknown>>
-    > {
+export default class Emphasis extends VueTransformer {
 
     public getName() {
         return 'emphasis';
     }
 
+    protected onLoad() {
+        // Load default classes and styles
+        const props = this.getPropsManager();
+        props.classes(this.getTheme()?.code?.block?.class);
+        props.styles(this.getTheme()?.code?.block?.style);
+    }
+
     public transform(node: Node, children: VNode[]) {
-
-        // Load object classes from configuration
-        const classes = this.configuration.theme.text?.emphasis?.classes;
-
-        return h('em', {
-            class: classes
-        }, children);
+        return h('em', this.getProps(), children);
     }
 
 }

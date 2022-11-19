@@ -40,6 +40,8 @@ export default class TransformerContainer<
             this.debug('Replacing Transformer: %o', transformer.getName());
         }
 
+        transformer.onLoad();
+
         this.transformers = results;
         this.transformers.push(transformer);
 

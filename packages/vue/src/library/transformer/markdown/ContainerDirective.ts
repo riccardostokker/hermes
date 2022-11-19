@@ -1,14 +1,12 @@
+import Configuration from '@/core/Configuration';
+import VueTransformer from '@/core/transformer/VueTransformer';
 import {Node} from 'unist';
 import {VNode} from 'vue';
-import {Transformer, TransformerContainer} from '@hermes-renderer/core';
+import { TransformerContainer} from '@hermes-renderer/core';
 import {Debugger} from 'debug';
 import {ContainerDirective as MDContainerDirective} from 'mdast-util-directive';
-import Configuration from '../../../core/Configuration';
 
-export default class ContainerDirective extends Transformer<Node,
-    VNode | undefined,
-    Record<string, unknown>,
-    Configuration<Record<string, unknown>>> {
+export default class ContainerDirective extends VueTransformer {
 
     protected container: TransformerContainer<MDContainerDirective, VNode | undefined, Record<string, unknown>, Configuration>;
 
@@ -34,7 +32,7 @@ export default class ContainerDirective extends Transformer<Node,
 
         for(const tr of this.container.getTransformers())
             if(tr.getName() === directive.name)
-                return tr.transform(directive, children);
+                return tr.run(directive, children);
 
         const defaultTransformerName = 'default';
         this.debug('No transformer for the container of type %o has been found.', directive.name);

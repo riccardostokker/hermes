@@ -83,6 +83,7 @@ async function update() {
     });
 
   } catch (err) {
+    console.log('Error: ', err);
     emit('error', err);
   }
 }

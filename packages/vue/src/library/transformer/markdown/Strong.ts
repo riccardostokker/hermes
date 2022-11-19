@@ -1,27 +1,22 @@
-import {Transformer} from '@hermes-renderer/core';
+import VueTransformer from '@/core/transformer/VueTransformer';
 import {Node} from 'unist';
 import {h, VNode} from 'vue';
-import Configuration from '../../../core/Configuration';
 
-export default class Strong extends Transformer<
-    Node,
-    VNode,
-    Record<string, unknown>,
-    Configuration<Record<string, unknown>>
-    > {
+export default class Strong extends VueTransformer {
 
     public getName(): string {
         return 'strong';
     }
 
+    protected onLoad() {
+        // Load default classes and styles
+        const manager = this.getPropsManager();
+        manager.classes(this.getTheme()?.text?.strong?.class);
+        manager.styles(this.getTheme()?.text?.strong?.style);
+    }
+
     public transform(node: Node, children: VNode[]) {
-
-        // Load object classes from configuration
-        const classes = this.configuration.theme.text?.strong?.classes;
-
-        return h('strong', {
-            class: classes
-        }, children);
+        return h('strong', this.getProps(), children);
     }
 
 }

@@ -1,96 +1,107 @@
-import Theme from '../../core/Theme';
+import Theme from '@/core/Theme';
 
 const theme: Theme = {
 
-    container: {
-        classes: [
-            'bg-slate-800',
-            'text-white',
-            'p-4',
-            'overflow-y-auto'
-        ]
-    },
+        container: {
+            class: [
+                'bg-slate-800',
+                'text-white',
+                'p-4',
+                'overflow-y-auto'
+            ]
+        },
 
-    text: {
-        colors: {
-            'red': 'text-red-500',
-            'emerald': 'text-emerald-500'
-        }
-    },
+        text: {
+            colors: {
+                'red': {
+                    class: 'text-red-500'
+                },
+                'emerald': {
+                    class: 'text-emerald-500'
+                }
+            }
+        },
 
-    heading: {
-        classes: {
-            default: [
+        heading: {
+            class: [
                 'font-bold',
                 'my-2'
             ],
             depth: {
-                '1': 'text-5xl',
-                '2': 'text-4xl',
-                '3': 'text-3xl',
-                '4': 'text-2xl',
-                '5': 'text-1xl',
-                '6': 'text-lg'
+                '1': {
+                    class: 'text-5xl'
+                },
+                '2': {
+                    class: 'text-4xl'
+                },
+                '3': {
+                    class: 'text-3xl'
+                },
+                '4': {
+                    class: 'text-2xl'
+                },
+                '5': {
+                    class: 'text-1xl'
+                },
+                '6': {
+                    class: 'text-lg'
+                }
+            }
+        },
+
+        paragraph: {},
+
+        list: {
+            li: {
+                class: []
+            },
+            ul: {
+                class: [
+                    'list-disc list-inside'
+                ]
+            },
+            ol: {
+                class: [
+                    'list-decimal list-inside'
+                ]
+            }
+        },
+
+        link: {
+            class: [
+                'text-red-500',
+                'hover:underline'
+            ]
+        },
+
+        code: {
+            inline: {
+                class: [
+                    'p-1',
+                    'bg-gray-900',
+                    'rounded'
+                ]
+            },
+            block: {
+                class: [
+                    'leading-snug',
+                    'p-2',
+                    'bg-gray-800',
+                    'rounded',
+                    'overflow-x-auto'
+                ]
+            }
+        },
+
+        layout: {
+            center: {
+                class: [
+                    'flex flex-col justify-center items-center'
+                ]
             }
         }
-    },
 
-    paragraph: {
-    },
-
-    list: {
-        li: {
-            classes: []
-        },
-        ul: {
-            classes: [
-                'list-disc list-inside'
-            ]
-        },
-        ol: {
-            classes: [
-                'list-decimal list-inside'
-            ]
-        }
-    },
-
-    link: {
-        classes: [
-            'text-red-500',
-            'hover:underline'
-        ]
-    },
-
-    code: {
-        highlight: {
-            theme: 'github'
-        },
-        inline: {
-            classes: [
-                'p-1',
-                'bg-gray-900',
-                'rounded'
-            ]
-        },
-        block: {
-            classes: [
-                'leading-snug',
-                'p-2',
-                'bg-gray-800',
-                'rounded',
-                'overflow-x-auto'
-            ]
-        }
-    },
-
-    layout: {
-        center: {
-            classes: [
-                'flex flex-col justify-center items-center'
-            ]
-        }
     }
-
-};
+;
 
 export default theme;

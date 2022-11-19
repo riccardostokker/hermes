@@ -1,14 +1,12 @@
+import Configuration from '@/core/Configuration';
+import VueTransformer from '@/core/transformer/VueTransformer';
 import {Node} from 'unist';
 import {VNode} from 'vue';
-import {Transformer, TransformerContainer} from '@hermes-renderer/core';
+import {TransformerContainer} from '@hermes-renderer/core';
 import {Debugger} from 'debug';
 import {TextDirective as MDTextDirective} from 'mdast-util-directive';
-import Configuration from '../../../core/Configuration';
 
-export default class TextDirective extends Transformer<Node,
-    VNode | undefined,
-    Record<string, unknown>,
-    Configuration<Record<string, unknown>>> {
+export default class TextDirective extends VueTransformer {
 
     protected container: TransformerContainer<MDTextDirective, VNode | undefined, Record<string, unknown>, Configuration>;
 
@@ -33,7 +31,7 @@ export default class TextDirective extends Transformer<Node,
 
         for(const tr of this.container.getTransformers())
             if(tr.getName() === directive.name)
-                return tr.transform(directive, children);
+                return tr.run(directive, children);
 
         const defaultTransformerName = 'default';
         this.debug('No transformer for the text of type %o has been found.', directive.name);

@@ -1,34 +1,28 @@
+import DirectiveTransformer from '@/core/transformer/DirectiveTransformer';
 import {Node} from 'unist';
 import {ConcreteComponent, h, VNode} from 'vue';
-import {Transformer} from '@hermes-renderer/core';
 import {ContainerDirective} from 'mdast-util-directive';
-import Configuration from '../../../../core/Configuration';
 
-export default class Default extends Transformer<Node, VNode | undefined, Record<string, unknown>, Configuration> {
+export default class Default extends DirectiveTransformer {
 
     public getName(): string {
         return 'default';
     }
 
     public transform(node: Node, children: VNode[]) {
-
-        const name = (node as ContainerDirective).name;
+        const directive = node as ContainerDirective;
 
         // Try to find the component from configuration
-        let component: ConcreteComponent | undefined = undefined;
+        const component: ConcreteComponent | undefined = this.configuration?.components?.[directive.name];
 
-        const components = this.configuration.components;
-        if(components)
-            component = components[name];
-
-        if(component)
-            return h(
-                component,
-                {
-                    context: this.context
-                },
-                () => children
-            );
+        if(component){
+            const manager = this.getPropsManager().clone();
+            manager.merge({
+                context: this.context
+            });
+            return h(component, manager.getProps(), () => children);
+        } else
+            return undefined;
 
     }
 

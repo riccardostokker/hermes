@@ -1,36 +1,36 @@
+import VueTransformer from '@/core/transformer/VueTransformer';
 import {Node} from 'unist';
-import {h, VNode} from 'vue';
-import {Transformer} from '@hermes-renderer/core';
+import {h} from 'vue';
 import {Math as MDMath} from 'mdast-util-math';
 import katex from 'katex';
-import Configuration from '../../../core/Configuration';
 
-export default class Math extends Transformer<
-    Node,
-    VNode,
-    Record<string, unknown>,
-    Configuration<Record<string, unknown>>
-    > {
+export default class Math extends VueTransformer {
 
     public getName() {
         return 'math';
     }
 
+    protected onLoad() {
+        // Load default classes and styles
+        const props = this.getPropsManager();
+        props.classes(this.getTheme()?.math?.block?.class);
+        props.styles(this.getTheme()?.math?.block?.style);
+    }
+
     public transform(node: Node) {
         const math = node as MDMath;
 
-        // Load object classes from configuration
-        const classes = this.configuration.theme.math?.block?.classes;
-
-        const html: string = katex.renderToString(math.value, {
+        const mathString = katex.renderToString(math.value, {
             displayMode: true,
             output: 'html'
         });
 
-        return h('div', {
-            class: classes,
-            innerHTML: html
+        const manager = this.getPropsManager();
+        manager.merge({
+            innerHTML: mathString
         });
+
+        return h('div', this.getProps());
     }
 
 }

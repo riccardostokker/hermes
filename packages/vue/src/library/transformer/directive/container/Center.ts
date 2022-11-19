@@ -1,31 +1,22 @@
+import DirectiveTransformer from '@/core/transformer/DirectiveTransformer';
 import {Node} from 'unist';
 import {h, VNode} from 'vue';
-import {Transformer} from '@hermes-renderer/core';
-import {ContainerDirective} from 'mdast-util-directive';
-import Configuration from '../../../../core/Configuration';
 
-export default class Math extends Transformer<Node, VNode, Record<string, unknown>, Configuration> {
+export default class Math extends DirectiveTransformer {
 
     public getName(): string {
         return 'center';
     }
 
+    protected onLoad() {
+        // Load default classes and styles
+        const manager = this.getPropsManager();
+        manager.classes(this.getTheme()?.layout?.center?.class);
+        manager.styles(this.getTheme()?.layout?.center?.style);
+    }
+
     public transform(node: Node, children: VNode[]) {
-
-        const directive = (node as ContainerDirective);
-
-        // Check if the directive name is a color
-        const classes = this.configuration.theme.layout?.center?.classes;
-
-        return h(
-            'div',
-            {
-                id: directive.attributes?.id,
-                class: classes ? [directive.attributes?.class, ...classes] : [directive.attributes?.class]
-            },
-            children
-        );
-
+        return h('div', this.getProps(), children);
     }
 
 }

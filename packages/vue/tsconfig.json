@@ -17,7 +17,11 @@
     "declarationMap": true,
     "allowJs": true,
     "declarationDir": "dist/types",
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "~/*": ["./src/*"]
+    }
   },
   "include": [
     "src/**/*"

@@ -1,36 +1,34 @@
+import VueTransformer from '@/core/transformer/VueTransformer';
 import {Node} from 'unist';
-import {h, VNode} from 'vue';
-import {Transformer} from '@hermes-renderer/core';
+import {h} from 'vue';
 import {InlineMath as MDInlineMath} from 'mdast-util-math';
 import katex from 'katex';
-import Configuration from '../../../core/Configuration';
 
-export default class InlineMath extends Transformer<
-    Node,
-    VNode,
-    Record<string, unknown>,
-    Configuration<Record<string, unknown>>
-    > {
+export default class InlineMath extends VueTransformer {
 
     public getName() {
         return 'inlineMath';
     }
 
+    protected onLoad() {
+        // Load default classes and styles
+        const props = this.getPropsManager();
+        props.classes(this.getTheme()?.math?.inline?.class);
+        props.styles(this.getTheme()?.math?.inline?.style);
+    }
+
     public transform(node: Node) {
         const math = node as MDInlineMath;
 
-        // Load object classes from configuration
-        const classes = this.configuration.theme.math?.inline?.classes;
-
-        const html: string = katex.renderToString(math.value, {
-            displayMode: false,
-            output: 'html'
+        const props = this.getPropsManager();
+        props.merge({
+            innerHTML: katex.renderToString(math.value, {
+                displayMode: false,
+                output: 'html'
+            })
         });
 
-        return h('span', {
-            class: classes,
-            innerHTML: html
-        });
+        return h('span', props.getProps());
     }
 
 }

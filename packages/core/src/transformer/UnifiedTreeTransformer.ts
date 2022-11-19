@@ -30,7 +30,7 @@ export default abstract class UnifiedTreeTransformer<
 
         for (const tr of this.transformers)
             if (tr.getName() === node.type) {
-                return tr.transform(node, children);
+                return tr.run(node, children);
             }
 
         this.debug('Could not find transformer for node of type %o', node.type);

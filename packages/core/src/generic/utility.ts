@@ -27,7 +27,7 @@ function clone<Type>(item: Type): Type {
 
 }
 
-function merge(target: Record<string, unknown>, ...sources: Record<string, unknown>[]) {
+function merge(target: Record<string, unknown>, ...sources: (Record<string, unknown> | undefined)[]) {
 
     if (!sources.length)
         return target;

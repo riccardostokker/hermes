@@ -1,36 +1,27 @@
+import VueTransformer from '@/core/transformer/VueTransformer';
 import {h, VNode} from 'vue';
 import {Node} from 'unist';
 import {List as MDList} from 'mdast';
-import {Transformer} from '@hermes-renderer/core';
-import Configuration from '../../../core/Configuration';
 
-export default class List extends Transformer<
-    Node,
-    VNode,
-    Record<string, unknown>,
-    Configuration<Record<string, unknown>>
-    > {
+export default class List extends VueTransformer{
 
     public  getName() {
         return 'list';
     }
 
+
     public transform(node: Node, children: VNode[]) {
         const list = node as MDList;
-
+        const props = this.getPropsManager();
 
         if(list.ordered){
-            // Load object classes from configuration
-            const classes = this.configuration.theme.list?.ol?.classes;
-            return h('ol', {
-                class: classes
-            }, children);
+            props.classes(this.configuration.theme.list?.ol?.class);
+            props.styles(this.configuration.theme.list?.ol?.style);
+            return h('ol', props.getProps(), children);
         } else {
-            // Load object classes from configuration
-            const classes = this.configuration.theme.list?.ul?.classes;
-            return h('ul', {
-                class: classes
-            }, children);
+            props.classes(this.configuration.theme.list?.ul?.class);
+            props.styles(this.configuration.theme.list?.ul?.style);
+            return h('ul', props.getProps(), children);
         }
 
     }

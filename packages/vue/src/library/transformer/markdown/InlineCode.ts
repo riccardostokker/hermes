@@ -1,35 +1,33 @@
+import VueTransformer from '@/core/transformer/VueTransformer';
 import hljs from 'highlight.js';
 import {Node} from 'unist';
-import {h, VNode} from 'vue';
-import {Transformer} from '@hermes-renderer/core';
+import {h} from 'vue';
 import {InlineCode as MDInlineCode} from 'mdast';
-import Configuration from '../../../core/Configuration';
 
-export default class InlineCode extends Transformer<
-    Node,
-    VNode,
-    Record<string, unknown>,
-    Configuration<Record<string, unknown>>
-    > {
+export default class InlineCode extends VueTransformer {
 
     public getName() {
         return 'inlineCode';
     }
 
+    protected onLoad() {
+        // Load default classes and styles
+        const props = this.getPropsManager();
+        props.classes(this.getTheme()?.code?.inline?.class);
+        props.styles(this.getTheme()?.code?.inline?.style);
+    }
+
     public transform(node: Node) {
         const code = node as MDInlineCode;
 
-        // Load object classes from configuration
-        const classes = this.configuration.theme.code?.inline?.classes;
-
-        const innerHTML = hljs.highlight(code.value, {
-            language: 'text'
-        }).value;
-
-        return h('code', {
-            class: classes,
-            innerHTML: innerHTML
+        const props = this.getPropsManager();
+        props.merge({
+            innerHTML: hljs.highlight(code.value, {
+                language: 'text'
+            }).value
         });
+
+        return h('code', props.getProps());
     }
 
 }

@@ -1,78 +1,49 @@
+interface StyleInterface {
+    class?: string[] | string,
+    style?: Record<string, string>
+}
+
 interface Theme {
 
-    container?: {
-        classes?: Array<string>
-    },
+    container?: StyleInterface,
 
-    error?: {
-        classes?: Array<string>
-    },
+    error?: StyleInterface,
 
     text?: {
-        colors: Record<string, string>
-        emphasis?: {
-            classes?: Array<string>
-        },
-        strong?: {
-            classes?: Array<string>
-        },
-        underline?: {
-            classes?: string[]
-        }
+        colors: Record<string, StyleInterface>
+        emphasis?: StyleInterface,
+        strong?: StyleInterface,
+        underline?: StyleInterface
     },
 
-    heading?: {
-        classes?: {
-            default?: Array<string>,
-            depth?: Record<string, string>
-        }
+    heading?: StyleInterface & {
+        depth?: Record<('1'|'2'|'3'|'4'|'5'|'6'), StyleInterface>
     }
 
-    paragraph?: {
-        classes?: Array<string>
-    },
+    paragraph?: StyleInterface,
+
+    image?: StyleInterface,
 
     list?: {
-        li?: {
-            classes?: Array<string>
-        },
-        ul?: {
-            classes?: Array<string>,
-        },
-        ol?: {
-            classes?: Array<string>,
-        }
+        ul?: StyleInterface,
+        ol?: StyleInterface,
+        li?: StyleInterface
     },
 
-    link?: {
-        classes?: Array<string>,
-    },
+    link?: StyleInterface,
 
     code?: {
-        highlight?: {
-            theme?: string
-        },
-        inline?: {
-            classes?: Array<string>
-        },
-        block?: {
-            classes?: Array<string>
-        },
+        inline?: StyleInterface,
+        block?: StyleInterface,
     },
 
     math?: {
-        inline?: {
-            classes?: Array<string>
-        },
-        block?: {
-            classes?: Array<string>
-        },
+        inline?: StyleInterface,
+        block?: StyleInterface,
     },
 
     layout?: {
-        center?: {
-            classes?: string[]
-        }
+        center?: StyleInterface
     }
 
 }
