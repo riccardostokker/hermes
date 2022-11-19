@@ -1,5 +1,4 @@
-
-export default interface Theme {
+interface Theme {
 
     container?: {
         classes?: Array<string>
@@ -77,3 +76,5 @@ export default interface Theme {
     }
 
 }
+
+export default Theme;

@@ -1,5 +1,5 @@
 import {Node} from 'unist';
-import {Component, ConcreteComponent, DefineComponent, h, VNode} from 'vue';
+import { ConcreteComponent, h, VNode} from 'vue';
 import {Transformer} from '@hermes-renderer/core';
 import {ContainerDirective} from 'mdast-util-directive';
 import Configuration from '../../../../core/Configuration';

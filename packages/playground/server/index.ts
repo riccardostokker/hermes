@@ -13,10 +13,10 @@ async function startServer() {
   app.use(compression());
 
   if (isProduction) {
-    const sirv = require('sirv');
-    app.use(sirv(`${root}/dist/client`));
+    const sirv = await import('sirv');
+    app.use(sirv.default(`${root}/dist/client`));
   } else {
-    const vite = require('vite');
+    const vite = await import('vite');
     const viteDevMiddleware = (
       await vite.createServer({
         root,

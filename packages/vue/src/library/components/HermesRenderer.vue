@@ -26,7 +26,7 @@ import HermesMarkdown from './HermesMarkdown.vue';
 import {ProcessorPlugin} from '@hermes-renderer/core';
 
 // Emits
-const emit = defineEmits(['error', 'front', 'load']);
+defineEmits(['error', 'front', 'load']);
 
 
 interface RenderProps {

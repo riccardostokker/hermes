@@ -2,7 +2,7 @@ import {Transformer} from '@hermes-renderer/core';
 import {Debugger} from 'debug';
 import {ContainerDirective, LeafDirective, TextDirective} from 'mdast-util-directive';
 import {Node} from 'unist';
-import {Component, ConcreteComponent, DefineComponent, VNode} from 'vue';
+import {ConcreteComponent, VNode} from 'vue';
 import Theme from './Theme';
 
 // Types
@@ -20,7 +20,7 @@ export type ContainerTransformerConstructor<Context extends Record<string, unkno
     Configuration extends Record<string, unknown>> = new(context: Context, configuration: Configuration, d?: Debugger) => Transformer<ContainerDirective, VNode | undefined, Context, Configuration>;
 
 
-export default interface Configuration<Context extends Record<string, unknown> = Record<string, unknown>> extends Record<string, unknown> {
+interface Configuration<Context extends Record<string, unknown> = Record<string, unknown>> extends Record<string, unknown> {
 
     /**
      * Through this object you can specify custom transformers to take care of the rendering
@@ -53,3 +53,5 @@ export default interface Configuration<Context extends Record<string, unknown> =
     theme: Theme
 
 }
+
+export default Configuration;
